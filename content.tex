@@ -1,0 +1,54 @@
+\begin{frame}{Зачем?}
+  \begin{enumerate}
+    \item Целые числа представляются как последовательность нулей и единиц
+      в двоичной системе счисления
+    \item Длина последовательности фиксирована --- 8, 16, 32, 64, \ldots бита
+    \item А значит ограничены наибольшее и наименьшее число \pause
+    \item Можно брать более длинные последовательности, но это не
+      всегда оптимально
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Как?}{Идея}
+  \begin{enumerate}
+    \item Можно изменять количество членов последовательности
+    \item Можно использовать не только двоичную систему счисления
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Kак?}{Реализация}
+  \begin{enumerate}
+    \item Будем использовать последовательности произвольной длины в куче
+    \item Cистема счисления не двоичная, а $2^n$-чная, где $n$ ---
+      длина машинного слова
+  \end{enumerate}
+
+  $$(2^{32}-1,\ldots)+(1,\ldots)=(0,1,\ldots)$$\pause
+  $$(2^{32}-1,\ldots)+(2^{32}-1,\ldots)+(0,3,\ldots)=(2^{32} - 2,4,\ldots)$$
+  $$\underbrace{(2^{32} - 1)*(2^{32})^0}_{(2^{32}-1,\ldots)} +
+  \underbrace{(2^{32} - 1)*(2^{32})^0}_{(2^{32}-1,\ldots)} +
+  \underbrace{3*(2^{32})^1}_{(0,3,\ldots)}
+  = 2^{33} - 2 + 3*2^{32}$$
+\end{frame}
+
+\begin{frame}{GMP}
+  GMP (GNU Multiple Precision Arithmetic library) --- библиотека на
+  языке C, реализующая такую модель.
+  \lstinputlisting[language=C]{gmp.c}
+\end{frame}
+
+\begin{frame}{GMP}{Где используют?}
+  \begin{enumerate}
+    \item OpenSSL и libgcrypt используют GMP для реализации криптографии \pause
+    \item Mathematica (система компьютерной алгебры)\pause
+    \item Integer в GHC (компилятор языка Haskell),
+      \texttt{java.math.BigInteger} и \texttt{java.math.BigDecimal} в
+      GNU Classpath
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    {\usebeamercolor[fg] \Huge Демонстрация}
+  \end{center}
+\end{frame}
